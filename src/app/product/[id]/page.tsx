@@ -86,7 +86,7 @@ export default function ProductDetailPage() {
           <p className="text-gray-600 text-sm">
             Category: {product.categories?.[0]?.name || 'Uncategorized'}
           </p>
-          <p className="text-gray-800 font-semibold text-lg">${product.price.toFixed(2)}</p>
+          <p className="text-gray-800 font-semibold text-lg">Kshs{product.price.toFixed(2)}</p>
           <p className="text-gray-700">{product.description || 'No description provided.'}</p>
 
           <Button onClick={handleAddToCart}>Add to Cart</Button>

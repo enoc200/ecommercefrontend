@@ -40,7 +40,7 @@ export default function CartPage() {
                     )}
                     {item.name}
                   </td>
-                  <td>${item.price.toFixed(2)}</td>
+                  <td>Kshs{item.price.toFixed(2)}</td>
                   <td>
                     <input
                       type="number"
@@ -52,7 +52,7 @@ export default function CartPage() {
                       }
                     />
                   </td>
-                  <td>${(item.price * item.quantity).toFixed(2)}</td>
+                  <td>Kshs{(item.price * item.quantity).toFixed(2)}</td>
                   <td>
                     <button
                       className="text-red-500 text-sm"
@@ -70,7 +70,7 @@ export default function CartPage() {
             <Button variant="destructive" onClick={clearCart}>
               Clear Cart
             </Button>
-            <p className="text-xl font-bold">Subtotal: ${subtotal.toFixed(2)}</p>
+            <p className="text-xl font-bold">Subtotal: Kshs{subtotal.toFixed(2)}</p>
           </div>
 
           <div className="mt-6 text-right">

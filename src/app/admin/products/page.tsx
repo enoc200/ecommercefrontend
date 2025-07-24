@@ -117,7 +117,7 @@ export default function ProductListPage() {
                     </td>
                     <td className="p-3 border-b font-medium">{product.name}</td>
                     <td className="p-3 border-b">{product.category_name}</td>
-                    <td className="p-3 border-b">${product.price.toFixed(2)}</td>
+                    <td className="p-3 border-b">Kshs{product.price.toFixed(2)}</td>
                     <td className="p-3 border-b space-x-4">
                       <Link
                         href={`/admin/products/edit/${product.id}`}

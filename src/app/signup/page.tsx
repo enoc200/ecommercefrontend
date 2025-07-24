@@ -39,7 +39,7 @@ export default function SignupPage() {
     if (error) {
       toast.error(error.message)
     } else {
-      toast.success('Signup successful! Please check your email to verify.')
+      toast.success('Signup successful!.')
       router.push('/login')
     }
 

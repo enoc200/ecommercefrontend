@@ -5,9 +5,12 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { ShoppingCart } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
+import { Button } from '@/components/ui/button'
 
 export default function Header() {
   const [search, setSearch] = useState('')
+  const [showOTPModal, setShowOTPModal] = useState(false)
+  const [otp, setOtp] = useState('')
   const router = useRouter()
   const searchParams = useSearchParams()
   const { items } = useCart()
@@ -23,8 +26,16 @@ export default function Header() {
     router.push(`/?${params.toString()}`)
   }
 
-  // ✅ Correctly typed reducer
   const cartCount = items.reduce((sum: number, item) => sum + item.quantity, 0)
+
+  const handleOTPSubmit = () => {
+    if (otp === '123456') {
+      setShowOTPModal(false)
+      router.push('/admin/panel') // ✅ Correct redirect path
+    } else {
+      alert('Invalid OTP. Try 123456')
+    }
+  }
 
   return (
     <header className="bg-white shadow-md">
@@ -66,11 +77,44 @@ export default function Header() {
               </span>
             )}
           </Link>
+
+          {/* Admin Button */}
+          <button
+            onClick={() => setShowOTPModal(true)}
+            className="text-blue-600 font-semibold hover:underline"
+          >
+            Admin
+          </button>
         </nav>
       </div>
+
+      {/* OTP Modal */}
+      {showOTPModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg max-w-sm w-full">
+            <h2 className="text-lg font-bold mb-4">Admin OTP Verification</h2>
+            <input
+              type="text"
+              maxLength={6}
+              className="border rounded w-full p-2 mb-4"
+              placeholder="Enter OTP (123456)"
+              value={otp}
+              onChange={(e) => setOtp(e.target.value)}
+            />
+            <div className="flex justify-between">
+              <Button variant="secondary" onClick={() => setShowOTPModal(false)}>
+                Cancel
+              </Button>
+              <Button onClick={handleOTPSubmit}>Verify</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
+
+
 
 
 

@@ -88,7 +88,7 @@ export default function HomePage() {
               <div className="w-full h-48 bg-gray-200 rounded mb-2" />
             )}
             <h3 className="font-semibold text-lg">{product.name}</h3>
-            <p className="text-gray-600 mb-2">${product.price.toFixed(2)}</p>
+            <p className="text-gray-600 mb-2">Kshs{product.price.toFixed(2)}</p>
 
             <div className="flex gap-2 mt-auto">
               <Link href={`/product/${product.id}`}>
