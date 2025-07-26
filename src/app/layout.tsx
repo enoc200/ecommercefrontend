@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'sonner'
+import { Suspense } from 'react'
+
 
 // 💡 Import reusable components
 import Header from '@/components/layouts/Header'
@@ -37,7 +39,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gray-50`}>
         <CartProvider>
-          <Header />
+          <Suspense fallback={null}>
+            <Header />
+          </Suspense>
+
 
           {/* Main Layout */}
           <div className="flex max-w-7xl mx-auto w-full mt-4 px-4">
