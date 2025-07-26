@@ -23,20 +23,14 @@ export default function ProductListPage() {
       setLoading(true)
 
       const { data, error } = await supabase
-        .from('products')
-        .select(`
-          id,
-          name,
-          price,
-          image_url,
-          created_at
-        `)
+        .from('products') // 👈 typed supabase table
+        .select('id, name, price, image_url, created_at')
         .order('created_at', { ascending: false })
 
       if (error) {
         toast.error('Failed to fetch products.')
       } else {
-        setProducts(data || [])
+        setProducts(data ?? [])
       }
 
       setLoading(false)
@@ -46,8 +40,8 @@ export default function ProductListPage() {
   }, [])
 
   const handleDelete = async (productId: string) => {
-    const confirm = window.confirm('Are you sure you want to delete this product?')
-    if (!confirm) return
+    const confirmDelete = window.confirm('Are you sure you want to delete this product?')
+    if (!confirmDelete) return
 
     const { error } = await supabase.from('products').delete().eq('id', productId)
 
@@ -124,3 +118,4 @@ export default function ProductListPage() {
     </div>
   )
 }
+
