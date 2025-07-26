@@ -16,11 +16,9 @@ interface Product {
   id: string
   name: string
   price: number
-  category_id?: string
-  category_name?: string
   image_url?: string
   description?: string
-  categories?: { name: string }[]
+ 
 }
 
 export default function ProductDetailPage() {
@@ -89,9 +87,6 @@ export default function ProductDetailPage() {
 
         <div className="flex-1 space-y-4">
           <h1 className="text-2xl font-bold">{product.name}</h1>
-          <p className="text-gray-600 text-sm">
-            Category: {product.categories?.[0]?.name || 'Uncategorized'}
-          </p>
           <p className="text-gray-800 font-semibold text-lg">Kshs{product.price.toFixed(2)}</p>
           <p className="text-gray-700">{product.description || 'No description provided.'}</p>
 
