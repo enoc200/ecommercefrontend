@@ -7,10 +7,7 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
-interface Category {
-  id: string
-  name: string
-}
+
 
 interface Product {
   id: string
