@@ -22,13 +22,14 @@ export default function ProductListPage() {
     const fetchProducts = async () => {
       setLoading(true)
 
-      const { data, error } = await supabase
-        .from('products') // 👈 typed supabase table
+      const { data, error }: { data: Product[] | null; error: Error | null } = await supabase
+        .from('products')
         .select('id, name, price, image_url, created_at')
         .order('created_at', { ascending: false })
 
       if (error) {
         toast.error('Failed to fetch products.')
+        setProducts([])
       } else {
         setProducts(data ?? [])
       }
@@ -118,4 +119,5 @@ export default function ProductListPage() {
     </div>
   )
 }
+
 
