@@ -7,11 +7,17 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useCart } from '@/context/CartContext'
+interface Category {
+  id: string
+  name: string
+}
 
 interface Product {
   id: string
   name: string
   price: number
+  category_id?: string
+  category_name?: string
   image_url?: string
   description?: string
   categories?: { name: string }[]
@@ -31,7 +37,7 @@ export default function ProductDetailPage() {
         .from('products')
         .select(`
           id, name, price, image_url, description,
-          categories(name)
+          categories(name )
         `)
         .eq('id', id)
         .single()

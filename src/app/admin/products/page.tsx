@@ -5,6 +5,11 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
+interface Category {
+  id: string
+  name: string
+}
+
 
 interface Product {
   id: string
@@ -14,6 +19,8 @@ interface Product {
   category_name?: string
   image_url?: string
   created_at?: string
+  categories?: Category[] 
+
 }
 
 export default function ProductListPage() {
@@ -41,16 +48,15 @@ export default function ProductListPage() {
         toast.error('Failed to fetch products.')
       } else {
         // ✅ Map categories from array (fix TS error)
-        const mappedProducts = (data || []).map((p: any) => ({
-          id: p.id,
-          name: p.name,
-          price: p.price,
-          image_url: p.image_url,
-          created_at: p.created_at,
-          category_id: p.category_id,
-          category_name: Array.isArray(p.categories)
-            ? p.categories[0]?.name ?? 'Uncategorized'
-            : p.categories?.name ?? 'Uncategorized',
+        const mappedProducts = (data || []).map((p: Product) => ({
+           id: p.id,
+           name: p.name,
+           price: p.price,
+           image_url: p.image_url,
+           created_at: p.created_at,
+           category_id: p.category_id,
+           category_name: (p as any).categories?.name ?? 'Uncategorized',
+            
         }))
         setProducts(mappedProducts)
       }
